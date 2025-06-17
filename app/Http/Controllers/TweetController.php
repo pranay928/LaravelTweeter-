@@ -10,7 +10,7 @@ class TweetController extends Controller
 
         // dd($request->all());
        $tweet =  $request->validate([
-            'tweet' => 'required|max:280'
+            'tweet' => 'required|max:280' 
         ]);
 
         $tweets= Tweet::create($tweet);
