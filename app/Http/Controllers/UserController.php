@@ -9,17 +9,40 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function home()
+    {
+        if(Auth::check())
+        {
+            return view('welcome');
+        }
+        else 
+        {
+        return view('auth/login');
+       
+        }
+
+    } 
+
     public function register(){
 
         return view('auth/register');
 
     }
 
+
     public function login()
     {
 
         return view('auth/login');
 
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success','You are logged out successfully!');
+
+       
     }
 
     public function registerSave(Request $request){
@@ -39,7 +62,7 @@ class UserController extends Controller
         $users->password = Hash::make($user['password']);
         $users->save();
 
-        return redirect()->route('login');     
+        return redirect()->route('login');    
           
 
     }

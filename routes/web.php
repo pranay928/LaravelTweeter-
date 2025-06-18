@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ValidUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [UserController::class, 'home'] )->name('home')->middleware(ValidUser::class);
 Route::post('/tweet', [TweetController::class, 'tweet'])->name('tweet');
-Route::get('/tweets', [TweetController::class, 'indexTweet'])->name('indexTweet');
+Route::get('/tweets', [TweetController::class, 'indexTweet'])->name('indexTweet')->middleware(ValidUser::class);
 Route::delete('/tweet/{id}', [TweetController::class, 'deleteTweet'])->name('deleteTweet');
 Route::put('/tweetUpdate/{id}', [TweetController::class, 'updateTweet'])->name('updateTweet');
 
@@ -31,3 +30,4 @@ Route::get('/register',[UserController::class, 'register'])->name('register');
 Route::post('/registerSave',[UserController::class, 'registerSave'])->name('registerSave');
 Route::get('/login',[UserController::class, 'login'])->name('login');
 Route::post('/loginAuth',[UserController::class, 'loginAuth'])->name('auth');
+Route::get('/logout',[UserController::class, 'logout'])->name('logout');

@@ -104,7 +104,8 @@
     </style>
 </head>
 <body>
-    <h1>Welcome</h1>
+    <h1>Welcome {{ Auth::User()->name }}</h1>
+    @include('logout')
 
     <div id="button">
         <button type="button" id="btn">What's on your mind?</button>  
