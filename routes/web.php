@@ -17,7 +17,7 @@ use App\Http\Middleware\ValidUser;
 */
 
 Route::get('/', [UserController::class, 'home'] )->name('home')->middleware(ValidUser::class);
-Route::post('/tweet', [TweetController::class, 'tweet'])->name('tweet');
+Route::post('/tweet', [TweetController::class, 'tweet'])->name('tweet')->middleware(ValidUser::class);
 Route::get('/tweets', [TweetController::class, 'indexTweet'])->name('indexTweet')->middleware(ValidUser::class);
 Route::delete('/tweet/{id}', [TweetController::class, 'deleteTweet'])->name('deleteTweet');
 Route::put('/tweetUpdate/{id}', [TweetController::class, 'updateTweet'])->name('updateTweet');
