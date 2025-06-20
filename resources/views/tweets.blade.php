@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>All Tweets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +50,7 @@
             padding: 20px;
             margin: 20px auto;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
             transition: transform 0.2s ease;
@@ -132,63 +133,65 @@
         }
     </style>
 </head>
+
 <body>
     <h1>All Tweets</h1>
 
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
     @elseif(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
     @endif
     <a href="{{ route('home') }}">Post a new tweet</a>
 
-    @foreach($tweets as $tweet)
+        @foreach($tweets as $tweet)
         <div class="tweet">
-            <form action="{{ route('updateTweet', $tweet->id) }}" method="POST" class="edit-form">
-                @csrf
-                @method('PUT')
+        <form action="{{ route('updateTweet', $tweet->id) }}" method="POST" class="edit-form">
+            @csrf
+            @method('PUT')
 
-                <input type="text" name="tweet" value="{{ $tweet->tweet }}" readonly class="tweet-input" />
+            <input type="text" name="tweet" value="{{ $tweet->tweet }}" readonly class="tweet-input" />
 
-                <p class="timestamp">Posted on {{ $tweet->created_at->format('d M Y, h:i A') }}</p>
+            <p class="timestamp">Posted on {{ $tweet->created_at->format('d M Y, h:i A') }}</p>
 
-                <button type="submit" class="save-btn" style="display:none;">Save</button>
-                <button type="button" onclick="enableEdit(this)">Edit</button>
-            </form>
+            <button type="submit" class="save-btn" style="display:none;">Save</button>
+            <button type="button" onclick="enableEdit(this)">Edit</button>
+        </form>
 
-            <form action="{{ route('deleteTweet', $tweet->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="delete-button" onclick="return confirm('Are you sure?')">Delete</button>
-            </form>
+        <form action="{{ route('deleteTweet', $tweet->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-button" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
         </div>
-    @endforeach
+        @endforeach
 
-   
 
-    <script>
-        function enableEdit(button) {
-            const form = button.closest('.edit-form');
-            const input = form.querySelector('.tweet-input');
-            const saveBtn = form.querySelector('.save-btn');
 
-            input.removeAttribute('readonly');
-            input.style.borderBottom = '2px solid #ccc';
-            input.style.background = '#f9fafb';
-            saveBtn.style.display = 'inline-block';
-            input.focus();
-        }
+        <script>
+            function enableEdit(button) {
+                const form = button.closest('.edit-form');
+                const input = form.querySelector('.tweet-input');
+                const saveBtn = form.querySelector('.save-btn');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.querySelectorAll('.alert-success, .alert-danger')
-                    .forEach(alert => alert.style.display = 'none');
-            }, 5000);
-        });
-    </script>
+                input.removeAttribute('readonly');
+                input.style.borderBottom = '2px solid #ccc';
+                input.style.background = '#f9fafb';
+                saveBtn.style.display = 'inline-block';
+                input.focus();
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                    document.querySelectorAll('.alert-success, .alert-danger')
+                        .forEach(alert => alert.style.display = 'none');
+                }, 5000);
+            });
+        </script>
 </body>
+
 </html>

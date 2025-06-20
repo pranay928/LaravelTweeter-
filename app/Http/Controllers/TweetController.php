@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 
 class TweetController extends Controller
 {
@@ -12,17 +14,20 @@ class TweetController extends Controller
    {
       $request->validate([
          'tweet' => 'required|max:280',
-      ]);
-
+      ]);  
+      
       $tweet = new Tweet();
       $tweet->tweet = $request->tweet;
       $tweet->userId = Auth::id();
-      $tweet->save();
+      $tweet->save(); 
+           
 
       return redirect()->route('indexTweet')->with('success', 'Tweet posted successfully!');
    }
 
-   //wrong code 
+  
+
+   /////////////////////////////////////// wrong code ///////////////////////////////////////////////////////////////
    // public function tweet(Request $request)
    // {
 
@@ -61,9 +66,5 @@ class TweetController extends Controller
             return redirect()->route('indexTweet')->with('success', 'Tweet updated successfully!');
          
      }
-
-        
-        
-
 
 }

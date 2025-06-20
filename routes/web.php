@@ -16,11 +16,11 @@ use App\Http\Middleware\ValidUser;
 |
 */
 
-Route::get('/', [UserController::class, 'home'] )->name('home')->middleware(ValidUser::class);
+Route::get('/home', [UserController::class, 'home'] )->name('home')->middleware(ValidUser::class);
 Route::post('/tweet', [TweetController::class, 'tweet'])->name('tweet')->middleware(ValidUser::class);
 Route::get('/tweets', [TweetController::class, 'indexTweet'])->name('indexTweet')->middleware(ValidUser::class);
-Route::delete('/tweet/{id}', [TweetController::class, 'deleteTweet'])->name('deleteTweet');
-Route::put('/tweetUpdate/{id}', [TweetController::class, 'updateTweet'])->name('updateTweet');
+Route::delete('/tweet/{id}', [TweetController::class, 'deleteTweet'])->name('deleteTweet')->middleware(ValidUser::class);
+Route::put('/tweetUpdate/{id}', [TweetController::class, 'updateTweet'])->name('updateTweet')->middleware(ValidUser::class);
 
 
 
@@ -28,6 +28,6 @@ Route::put('/tweetUpdate/{id}', [TweetController::class, 'updateTweet'])->name('
 
 Route::get('/register',[UserController::class, 'register'])->name('register');
 Route::post('/registerSave',[UserController::class, 'registerSave'])->name('registerSave');
-Route::get('/login',[UserController::class, 'login'])->name('login');
+Route::get('/',[UserController::class, 'login'])->name('login');
 Route::post('/loginAuth',[UserController::class, 'loginAuth'])->name('auth');
 Route::get('/logout',[UserController::class, 'logout'])->name('logout');

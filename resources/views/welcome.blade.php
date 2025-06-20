@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post a Tweet</title>
+    <title>Post a Tweet</title>    
     <style>
         * {
             box-sizing: border-box;
@@ -109,6 +109,9 @@
    
     <div id="button">
         <button type="button" id="btn">What's on your mind?</button>  
+    </div>
+    <div id="button">
+        <button type="button" id="btn"><a style="text-decoration:none; color: white;" href="{{ route('indexTweet') }}">See Your Tweets</a></button>  
     </div>    
 
     <div id="form"> 

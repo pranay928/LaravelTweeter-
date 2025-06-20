@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,6 +69,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="container my-5">
@@ -85,9 +87,14 @@
 
           <!-- Right Side Form -->
           <div class="col-md-6 form-section text-white">
+            @if(session('error'))
+            <div class="alert alert-danger">
+              {{ 'session('error')' }}
+            </div>
+            @endif
             <h3 class="mb-4">Create an account</h3>
             <p class="small-link mb-3">Already have an account? <a href="{{ route('login') }}" class="text-decoration-none">Log in</a></p>
-            
+
             <form action="{{ route('registerSave') }}" method="POST">
               @csrf
 
@@ -121,4 +128,5 @@
   </div>
 
 </body>
+
 </html>
